@@ -1,7 +1,14 @@
 import React from "react";
 import axios from "axios";
-import Card from "./Card";
-import FollowerCard from "./FollowerCard";
+import Cards from "./Card";
+import styled from "styled-components";
+
+const Div = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+`;
 
 export default class App extends React.Component {
   constructor() {
@@ -39,7 +46,7 @@ export default class App extends React.Component {
           followersInfo: res.data,
         });
 
-        // console.log(this.state.followersInfo);
+        console.log(this.state.followersInfo);
       })
       .catch((err) => console.log(err));
   };
@@ -48,10 +55,12 @@ export default class App extends React.Component {
     return (
       <div>
         <h1> Git Hub Cards </h1>
-        <Card cardInfo={this.state.cardInfo} />
-        {this.state.followersInfo.map((item) => (
-          <Card key={item} cardInfo={item} />
-        ))}
+        <Div>
+          <Cards cardInfo={this.state.cardInfo} />
+          {this.state.followersInfo.map((item) => (
+            <Cards key={item} cardInfo={item} />
+          ))}
+        </Div>
       </div>
     );
   }
